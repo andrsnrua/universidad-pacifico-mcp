@@ -1,0 +1,74 @@
+{
+  "name": "universidad-pacifico-mcp",
+  "version": "0.5.0",
+  "description": "Servidor MCP local y no oficial para Aula Virtual Blackboard de la Universidad del Pacífico (Perú).",
+  "license": "ISC",
+  "type": "commonjs",
+  "main": "dist/mcp/server.js",
+  "bin": {
+    "up-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "docs/",
+    "examples/"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "login": "node dist/index.js login",
+    "logout": "node dist/index.js logout",
+    "doctor": "node dist/index.js doctor",
+    "browser:install": "playwright install chromium",
+    "test": "npm run build && node scripts/test.mjs",
+    "test:mcp": "node tests/mcp-smoke.mjs",
+    "check": "npm run typecheck && npm test && npm run test:mcp && npm run check:package",
+    "check:package": "node scripts/check-package.mjs",
+    "share": "npm run check && npm run package:share",
+    "package:share": "node scripts/share.mjs",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "blackboard",
+    "universidad-del-pacifico",
+    "upacifico",
+    "aula-virtual",
+    "peru"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "axios": "^1.20.0",
+    "pdfjs-dist": "6.4.299",
+    "playwright": "^1.62.1",
+    "proper-lockfile": "4.1.2",
+    "yauzl": "3.4.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "@types/proper-lockfile": "4.1.4",
+    "@types/yauzl": "3.4.0",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrsnrua/universidad-pacifico-mcp.git"
+  },
+  "homepage": "https://github.com/andrsnrua/universidad-pacifico-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/andrsnrua/universidad-pacifico-mcp/issues"
+  }
+}

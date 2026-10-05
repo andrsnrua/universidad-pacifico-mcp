@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "universidad-pacifico": {
+      "command": "node",
+      "args": ["/ruta/absoluta/universidad-pacifico-mcp/dist/index.js"],
+      "env": { "UP_MCP_REMEMBER_SSO": "0" }
+    }
+  }
+}

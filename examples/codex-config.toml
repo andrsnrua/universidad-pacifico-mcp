@@ -1,0 +1,10 @@
+# Reemplaza args por la ruta absoluta al proyecto ya compilado.
+# Añade la tabla a tu configuración; no sobrescribas otras integraciones.
+[mcp_servers.universidad_pacifico]
+command = "node"
+args = ["C:/Proyectos/universidad-pacifico-mcp/dist/index.js"]
+startup_timeout_sec = 20
+tool_timeout_sec = 300
+
+[mcp_servers.universidad_pacifico.env]
+UP_MCP_REMEMBER_SSO = "0"
