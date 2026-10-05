@@ -136,8 +136,8 @@ test('exportaciones se guardan dentro de la raíz, respetan subcarpetas y crean 
   const grades = await exportCourseGrades(fixture(), courseId, userId, { outputDir: 'mis-reportes' });
   assert.notEqual(first.destination, second.destination);
   assert.equal(fs.readFileSync(first.destination, 'utf8'), firstBody);
-  assert.equal(path.dirname(first.destination), path.join(root, 'exports'));
-  assert.equal(path.dirname(grades.destination), path.join(root, 'mis-reportes'));
+  assert.equal(path.dirname(first.destination), path.join(fs.realpathSync(root), 'exports'));
+  assert.equal(path.dirname(grades.destination), path.join(fs.realpathSync(root), 'mis-reportes'));
   assert.equal(first.eventCount, 2); assert.equal(first.complete, true); assert.equal(first.synced, false);
   assert.equal(grades.rowCount, 1); assert.equal(grades.calculatedFinalGrade, false);
   assert.equal(readCsv(fs.readFileSync(grades.destination, 'utf8'))[1][4], '0');

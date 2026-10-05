@@ -54,6 +54,20 @@ test('un curso restringido genera un manifiesto incompleto que explica el fallo'
   assert(fs.existsSync(result.manifestPath));
   assert.deepEqual(result.retired, []);
 });
+test('descargas aceptan una raíz cuyo ancestro tiene un alias de sistema y mantienen el ámbito', async t => {
+  const temporary = fixtureRoot(t), parent = path.join(temporary, 'physical'), alias = path.join(temporary, 'alias');
+  fs.mkdirSync(path.join(parent, 'library'), { recursive: true });
+  try { fs.symlinkSync(parent, alias, process.platform === 'win32' ? 'junction' : 'dir'); }
+  catch { t.skip('No se pueden crear alias de directorios en este entorno.'); return; }
+  process.env.UP_MCP_DOWNLOAD_DIR = path.join(alias, 'library');
+  const client = { get: async (url: string) => url.endsWith('/contents')
+    ? { data: { results: [{ id: '_2_1', title: 'Lectura', body: '<p>' + 'Texto ficticio de estudio. '.repeat(10) + '</p>', contentHandler: { id: 'resource/x-bb-folder' } }] } }
+    : url.endsWith('/gradebook/columns') ? { data: { results: [] } } : { data: { id: '_101_1', name: 'Curso ficticio' } } } as unknown as AxiosInstance;
+  const result = await downloadWholeCourse(client, '_101_1');
+  assert.equal(result.complete, true); assert.equal(result.downloaded.length, 1);
+  assert(!path.relative(fs.realpathSync(process.env.UP_MCP_DOWNLOAD_DIR), result.directory).startsWith('..'));
+  assert(fs.existsSync(result.downloaded[0].saved!));
+});
 
 test('un archivo compatible cuyo endpoint desaparece no produce un manifiesto completo', async t => {
   fixtureRoot(t);

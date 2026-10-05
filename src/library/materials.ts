@@ -63,12 +63,13 @@ async function extractDocument(data: Buffer, extension: string, options: ReadOpt
     const workerPath = fs.existsSync(compiledWorker) ? compiledWorker : path.resolve(__dirname, '../../dist/library/extractor-worker.js');
     if (!fs.existsSync(workerPath)) { reject(new Error('Compila el proyecto con npm run build antes de leer documentos.')); return; }
     const worker = new Worker(workerPath, { workerData: { data, extension, startPage: options.startPage ?? 1, maxPages: options.maxPages ?? 10 },
-      stdout: true, stderr: true, resourceLimits: { maxOldGenerationSizeMb: 128 } });
+      stdout: true, stderr: true, execArgv: [], resourceLimits: { maxOldGenerationSizeMb: 256 } });
     // Parser diagnostics never enter the MCP stdio protocol or disclose document text.
     worker.stdout?.resume(); worker.stderr?.resume(); let settled = false;
     const timer = setTimeout(() => { settled = true; void worker.terminate(); reject(new Error('La lectura excedió el tiempo permitido.')); }, Math.min(options.timeoutMs ?? 30_000, 30_000));
     worker.once('message', message => { settled = true; clearTimeout(timer); void worker.terminate(); message.error ? reject(new Error(message.error)) : resolve(message.result); });
-    worker.once('error', () => { settled = true; clearTimeout(timer); reject(new Error('El lector local no pudo procesar el documento.')); });
+    worker.once('error', error => { settled = true; clearTimeout(timer); reject(new Error((error as NodeJS.ErrnoException).code === 'ERR_WORKER_OUT_OF_MEMORY'
+      ? 'El documento excedió la memoria permitida del lector local.' : 'El lector local no pudo procesar el documento.')); });
     worker.once('exit', () => { clearTimeout(timer); if (!settled) reject(new Error('El lector local terminó sin resultado.')); });
   });
 }
@@ -116,7 +117,10 @@ export function inspectManifest(relative: string) {
   const root = downloadRoot(); const results = manifest.downloaded.map((record: any) => {
     let filePath: string | null = null, exists = false, sizeMatches: boolean | null = null;
     if (typeof record.saved === 'string') {
-      const relativeFile = path.isAbsolute(record.saved) ? path.relative(root, record.saved) : record.saved;
+      let relativeFile = path.isAbsolute(record.saved) ? path.relative(fs.realpathSync(root), record.saved) : record.saved;
+      if (path.isAbsolute(record.saved) && (relativeFile === '..' || relativeFile.startsWith(`..${path.sep}`) || path.isAbsolute(relativeFile))) {
+        relativeFile = path.relative(root, record.saved);
+      }
       try { const stat = fs.statSync(libraryPath(relativeFile)); filePath = relativeFile.split(path.sep).join('/'); exists = true;
         sizeMatches = typeof record.size === 'number' ? stat.size === record.size : null; } catch { /* Unsafe or missing targets are never read. */ }
     }

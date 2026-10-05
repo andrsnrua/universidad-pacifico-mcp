@@ -5,7 +5,7 @@ Entrega **0.5.0**, comprobada localmente el **5 de octubre de 2026** en Windows 
 | Comprobación | Resultado |
 | --- | --- |
 | TypeScript y compilación | Aprobados. |
-| Pruebas automatizadas | 174 aprobadas, 0 fallos y 0 omitidas. |
+| Pruebas automatizadas | 176 aprobadas, 0 fallos y 0 omitidas. |
 | Handshake MCP por stdio | Aprobado; identidad y versión correctas. |
 | Catálogo de herramientas | 70 herramientas; anotaciones de consultas y cambios locales verificadas. |
 | Recursos y prompts | 1 recurso y 5 prompts disponibles. |

@@ -8,6 +8,7 @@
 - Catálogo de 70 herramientas y cinco prompts; nuevos `leer_material` y `revisar_mis_cursos`.
 - Retroalimentación textual sin consulta de archivos por defecto; `includeAttemptFiles: true` conserva la consulta opcional y declara permisos fallidos. `attemptFilesRequested` indica el alcance consultado.
 - Node.js mínimo 22.13.0 para PDF.js; dependencias actualizadas con correcciones compatibles.
+- Correcciones de distribución: código de descargas incluido en Git, recorridos y manifiestos compatibles con alias de rutas de macOS, y worker PDF sin heredar cargadores de pruebas, con memoria acotada a 256 MiB.
 
 ## 0.4.0 — 2026-10-05
 

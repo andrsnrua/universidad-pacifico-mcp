@@ -400,6 +400,9 @@ export async function downloadWholeCourse(
       ? options.courseDirectory
       : outputDir ? path.join(outputDir, rootName) : rootName,
   );
+  // macOS exposes /var through /private/var. Compare paths in one canonical
+  // coordinate system after resolveDownloadDir has rejected unsafe roots.
+  const canonicalRoot = fs.realpathSync(downloadRoot());
   const previous = latestCourseManifest(base, courseId);
   const previousByKey = new Map((previous?.downloaded ?? []).filter(record => record.sourceKey).map(record => [record.sourceKey!, record]));
   const previousLegacy = new Map((previous?.downloaded ?? []).map(record => [`${record.source}:${record.contentId}:${record.fileName}`, record]));
@@ -445,7 +448,7 @@ export async function downloadWholeCourse(
       itemCount += 1;
       const title = item.title ?? item.id;
       visitedContentIds.add(String(item.id));
-      const itemDir = resolveDownloadDir(path.relative(downloadRoot(), path.join(base, ...relativeParts)));
+      const itemDir = resolveDownloadDir(path.relative(canonicalRoot, path.join(base, ...relativeParts)));
       let attachments: Awaited<ReturnType<typeof attachmentList>> = [];
       try {
         attachments = await attachmentList(client, courseId, item.id, item);
@@ -618,7 +621,7 @@ export async function downloadWholeCourse(
 
     for (const column of columns) {
       const title = column.name ?? String(column.id);
-      const folder = resolveDownloadDir(path.relative(downloadRoot(), path.join(base, 'Actividades', `${safeSegment(title, String(column.id))} [${column.id}]`)));
+      const folder = resolveDownloadDir(path.relative(canonicalRoot, path.join(base, 'Actividades', `${safeSegment(title, String(column.id))} [${column.id}]`)));
 
       // Los adjuntos que cuelgan de la actividad, salvo los que el árbol ya trajo.
       let attachments: Awaited<ReturnType<typeof attachmentList>> = [];

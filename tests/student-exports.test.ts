@@ -38,7 +38,7 @@ test('comprobantes exportados neutralizan fórmulas y preservan tamaño cero', a
 });
 test('estructura JSON y resumen Markdown se guardan en la biblioteca privada con referencias', async t => {
   const root = temporary(t); const outline = await exportOutline(fixture(), courseId); const brief = await exportBrief(fixture(), courseId, since, until);
-  assert(path.relative(root, outline.destination).startsWith('exports')); assert.equal(JSON.parse(fs.readFileSync(outline.destination, 'utf8')).courseId, courseId);
+  assert(path.relative(fs.realpathSync(root), outline.destination).startsWith('exports')); assert.equal(JSON.parse(fs.readFileSync(outline.destination, 'utf8')).courseId, courseId);
   assert(fs.readFileSync(brief.destination, 'utf8').includes('_6_1')); assert.equal(brief.complete, true);
 });
 test('notas de varias secciones preservan ceros y neutralizan texto de columnas y cursos', async t => {

@@ -82,3 +82,12 @@ test('manifiesto comprueba tamaño y rechaza referencias fuera de la biblioteca'
   const root = temporary(t); fs.writeFileSync(path.join(root, 'lecture.txt'), 'abc'); fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ schemaVersion: 2, course: { id: '_101_1' }, complete: true, failed: [], downloaded: [{ saved: path.join(root, 'lecture.txt'), size: 4 }, { saved: '../outside.txt', size: 3 }] }));
   const data = inspectManifest('manifest.json'); assert.equal(data.counts.sizeMismatch, 1); assert.equal(data.counts.missingOrUnsafe, 1); assert.equal(data.contentHashesVerified, false); assert.equal(data.complete, false);
 });
+test('manifiesto reconoce rutas canónicas cuando la raíz tiene un alias de sistema', t => {
+  const temporaryRoot = temporary(t), actual = path.join(temporaryRoot, 'physical'), alias = path.join(temporaryRoot, 'alias');
+  fs.mkdirSync(path.join(actual, 'library'), { recursive: true });
+  try { fs.symlinkSync(actual, alias, process.platform === 'win32' ? 'junction' : 'dir'); }
+  catch { t.skip('No se pueden crear alias de directorios en este entorno.'); return; }
+  process.env.UP_MCP_DOWNLOAD_DIR = path.join(alias, 'library'); const root = fs.realpathSync(process.env.UP_MCP_DOWNLOAD_DIR);
+  fs.writeFileSync(path.join(root, 'lecture.txt'), 'abc'); fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ schemaVersion: 2, course: { id: '_101_1' }, complete: true, failed: [], downloaded: [{ saved: path.join(root, 'lecture.txt'), size: 3 }] }));
+  const data = inspectManifest('manifest.json'); assert.equal(data.complete, true); assert.equal(data.results[0].path, 'lecture.txt');
+});
