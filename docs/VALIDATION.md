@@ -21,4 +21,4 @@ Las pruebas automatizadas usan respuestas ficticias, servidores de prueba en loo
 
 El pipeline contempla tipado TypeScript, pruebas unitarias, un proceso MCP real por stdio y revisión de archivos distribuidos. La comprobación manual de login, calendario y cursos con una cuenta UP es independiente y debe realizarla el usuario/mantenedor antes de asumir compatibilidad completa con su sección.
 
-La matriz CI de Linux/macOS/Windows y Node 22/24 describe los entornos que se comprobarán al subir el proyecto. Configurar esa matriz no implica haber ejecutado todas sus combinaciones localmente.
+La matriz de GitHub Actions aprobó las seis combinaciones de Linux, macOS y Windows con Node 22 y 24 el 5 de octubre de 2026. La ejecución incluye instalación desde el lockfile, tipado, compilación, pruebas, protocolo MCP y revisión del paquete. Consulta la [ejecución comprobada](https://github.com/andrsnrua/universidad-pacifico-mcp/actions/runs/37382146370). Estas comprobaciones remotas usan exclusivamente datos ficticios y no una cuenta institucional.
