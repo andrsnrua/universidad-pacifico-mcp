@@ -17,7 +17,7 @@ up-mcp doctor      Muestra configuración y estado local, sin contactar la UP
 up-mcp --version   Muestra la versión
 
 No se aceptan contraseñas ni nombres de usuario por línea de comandos.
-Instalación desde el código: npm ci && npm run build
+Instalación desde el código: npm ci --ignore-scripts && npm run build
 `;
 
 async function main(): Promise<void> {
@@ -60,6 +60,6 @@ async function main(): Promise<void> {
 main().catch(() => {
   // Errores Axios pueden contener URL firmadas y objetos de sesión. Los detalles
   // del transporte no se vuelcan al protocolo ni a registros públicos.
-  console.error('No se pudo completar la operación. Revisa la configuración con up-mcp doctor y la guía docs/TROUBLESHOOTING.md.');
+  console.error('No se pudo completar la operación. Revisa la configuración con up-mcp doctor y la guía docs/guide/troubleshooting.md.');
   process.exitCode = 1;
 });

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { AxiosInstance } from 'axios';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { registerParticipationTools } from '../src/blackboard/participation-tools.js';
+import { registerTools } from '../src/mcp/tools/index.js';
 import { getDiscussion, getGroup, listDiscussions, listDiscussionMessages, listGroups, listGroupSets } from '../src/blackboard/api/participation.js';
 import { contentReviewStatus, gradeDetail, multiCourseAgenda, ownAttendance, ownEnrollment } from '../src/blackboard/services/participation.js';
 
@@ -180,8 +180,8 @@ test('herramientas de discusión onlyMine fijan el usuario de sesión y usan Pub
   const client = fixture((url, params) => {
     assert(url.endsWith('/messages') || url.endsWith('/replies')); assert.equal(params.userId, userId); assert.equal(params.status, 'Published'); return page([]);
   });
-  registerParticipationTools(server, async () => ({ client, session: { cookies: [], xsrfToken: '', expiresAt: Date.now() + 10000, userId } }));
-  assert.equal(handlers.size, 13);
+  registerTools(server, async () => ({ client, session: { cookies: [], xsrfToken: '', expiresAt: Date.now() + 10000, userId } }));
+  assert.equal(handlers.size, 70);
   await handlers.get('blackboard_list_discussion_messages')!({ courseId, discussionId: '_2_1', onlyMine: true, userId: '_999_1' });
   await handlers.get('blackboard_list_discussion_replies')!({ courseId, discussionId: '_2_1', messageId: '_3_1', onlyMine: true });
 });

@@ -5,7 +5,6 @@ release/
 .env.*
 !.env.example
 .upacifico-mcp/
-.blackboard-up-cli/
 session.json
 sso-state.bin
 browser-profile/

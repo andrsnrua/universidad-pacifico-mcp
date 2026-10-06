@@ -1,5 +1,7 @@
 # Autenticación y duración de sesiones
 
+[Índice de documentación](../README.md)
+
 ## Primer acceso
 
 `up-mcp login` o `blackboard_login` abre un perfil local propio y navega a `https://aulavirtual.up.edu.pe/ultra`. El usuario completa cualquier selección de cuenta, contraseña, MFA o confirmación de acceso. El código no rellena contraseñas ni elige por el usuario la opción de mantener sesión iniciada.

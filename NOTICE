@@ -1,18 +1,12 @@
 Universidad del Pacífico MCP
 
-Proyecto comunitario no oficial para el Aula Virtual de la Universidad del Pacífico, Perú.
+Integración comunitaria no oficial para Aula Virtual de la Universidad del Pacífico, Perú.
 
 Partes del código de Blackboard, autenticación, descargas y sus pruebas se derivan
-de Campus CLI y de la adaptación local de ese código en NexoSavia.
-
-Proyecto original: https://github.com/alejooroncoy/campus-cli
+de Campus CLI: https://github.com/alejooroncoy/campus-cli
 Copyright (c) 2026 Alejandro Oroncoy
-Licencia original: ISC, conservada íntegramente en LICENSE.
+Licencia ISC, conservada íntegramente en LICENSE.
 
-Esta entrega independiente reorganiza la integración UP, elimina otras
-integraciones y telemetría, restringe el cliente REST a GET e incorpora guías,
-paginación, herramientas adicionales, ejemplos y distribución verificable.
-
-El nombre identifica compatibilidad; no implica autoría, patrocinio ni respaldo
-de la Universidad del Pacífico, Microsoft o el proveedor de Blackboard.
-El código no concede derechos de redistribución sobre materiales académicos.
+El nombre de la universidad identifica compatibilidad. No implica autoría,
+patrocinio ni respaldo institucional. La licencia del código no concede derechos
+de redistribución sobre materiales académicos.

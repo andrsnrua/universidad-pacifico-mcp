@@ -1,5 +1,14 @@
 # Cambios
 
+## 0.6.0 — 2026-10-05
+
+- Reorganización de las 70 herramientas en once módulos MCP por función, con sesión, esquemas y respuestas compartidas.
+- Separación de servidor, prompts y recursos; la integración Blackboard queda en autenticación, API y consultas académicas.
+- README centrado en uso e instalación; documentación con índice, guías, referencia y desarrollo.
+- Eliminación de referencias a aplicaciones ajenas y comentarios de migración que no describían este proyecto. Atribución original conservada en NOTICE y LICENSE.
+- Referencia completa agrupada por función, enlaces internos actualizados y comprobación automática de documentación.
+- Compilación limpia para excluir módulos antiguos de los paquetes. Se conservan el binario, nombres, parámetros y capacidades del contrato MCP.
+
 ## 0.5.0 — 2026-10-05
 
 - Veinticuatro herramientas nuevas: fuentes institucionales, calendario y anuncios detallados, periodos de evaluación, estructura, búsquedas múltiples, comprobantes propios, revisión resumida, libros de notas, panorama de cursos y resumen con fuentes.
@@ -47,7 +56,7 @@
 
 ## 0.1.0 — 2026-10-05
 
-- Extracción independiente del MCP de Blackboard UP, con licencia ISC y atribución conservadas.
+- Primera versión del MCP para Aula Virtual UP, con licencia ISC y atribución conservadas.
 - Separación de servidor MCP, consultas, autenticación, descargas y seguridad.
 - 20 herramientas enfocadas en Aula Virtual UP, una guía MCP y tres prompts.
 - Cliente REST GET, paginación de colecciones y sesiones privadas del proyecto.

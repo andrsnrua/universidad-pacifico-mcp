@@ -1,5 +1,7 @@
 # Exportar agenda y notas
 
+[Índice de documentación](../README.md)
+
 Las exportaciones son archivos locales con datos accesibles de tu cuenta. Se guardan por defecto en `exports/`, dentro de `UP_MCP_DOWNLOAD_DIR` o `~/Downloads/upacifico-mcp`. `outputDir` permite una subcarpeta relativa. Cada operación crea un nombre único, no sobrescribe copias anteriores y aplica un límite de 5 MiB por exportación y la cuota de la raíz de descargas.
 
 ## Agenda en iCalendar
@@ -37,4 +39,4 @@ Los archivos exportados contienen información académica privada y no forman pa
 
 Los IDs del ejemplo son ficticios. Usa los IDs reales devueltos por las herramientas.
 
-Las seis exportaciones adicionales de 0.5.0 y sus límites se detallan en [STUDENT-WORKFLOWS.md](STUDENT-WORKFLOWS.md).
+Las exportaciones de varias secciones, asistencia, estructura, resumen y comprobantes se detallan en [usage.md](../guide/usage.md).

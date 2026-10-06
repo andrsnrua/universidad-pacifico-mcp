@@ -48,24 +48,24 @@ function isInside(parent: string, child: string): boolean {
 
 /**
  * MCP callers may choose a subdirectory, but never an arbitrary location on the
- * machine. The root itself is controlled by the person who launches Campus via
+ * machine. The root itself is controlled by the person who launches UP MCP via
  * UP_MCP_DOWNLOAD_DIR, not by course content or a tool-calling model.
  */
 export function resolveDownloadDir(subdirectory?: string): string {
   const root = downloadRoot();
   if (subdirectory && path.isAbsolute(subdirectory)) {
-    throw new Error(`outputDir must be relative to the Campus download directory: ${root}`);
+    throw new Error(`outputDir must be relative to the UP MCP download directory: ${root}`);
   }
 
   if (fs.existsSync(root) && fs.lstatSync(root).isSymbolicLink()) {
-    throw new Error(`Refusing to use a symbolic link as the Campus download directory: ${root}`);
+    throw new Error(`Refusing to use a symbolic link as the UP MCP download directory: ${root}`);
   }
   fs.mkdirSync(root, { recursive: true, mode: 0o700 });
   fs.chmodSync(root, 0o700);
 
   const requested = path.resolve(root, subdirectory ?? '.');
   if (!isInside(root, requested)) {
-    throw new Error(`Refusing to write outside the Campus download directory: ${root}`);
+    throw new Error(`Refusing to write outside the UP MCP download directory: ${root}`);
   }
   const realRoot = fs.realpathSync(root);
   let current = realRoot;
@@ -75,7 +75,7 @@ export function resolveDownloadDir(subdirectory?: string): string {
     firstPart === DOWNLOAD_QUOTA_LOCK
     || firstPart?.startsWith(DOWNLOAD_QUOTA_REAP_PREFIX)
   ) {
-    throw new Error(`outputDir uses the reserved Campus quota lock name: ${DOWNLOAD_QUOTA_LOCK}`);
+    throw new Error(`outputDir uses the reserved UP MCP quota lock name: ${DOWNLOAD_QUOTA_LOCK}`);
   }
   for (const part of relativeParts) {
     const next = path.join(current, part);
@@ -203,7 +203,7 @@ async function acquireQuotaLock(root: string): Promise<{
     throw error;
   }
   const ownershipError = () => Object.assign(
-    new Error('Campus download quota lock was replaced'),
+    new Error('UP MCP download quota lock was replaced'),
     { code: 'ECOMPROMISED' },
   );
   const stillOwnsLock = () => {
@@ -289,7 +289,7 @@ export async function writeLimitedDownload(
       const available = quotaLimit - treeBytes(quotaRoot);
       const allowedBytes = Math.min(maxBytes, Math.max(0, available));
       if (allowedBytes <= 0) {
-        throw new Error(`Campus download directory reached its ${quotaLimit}-byte quota`);
+        throw new Error(`UP MCP download directory reached its ${quotaLimit}-byte quota`);
       }
       maxBytes = allowedBytes;
     }
@@ -323,7 +323,7 @@ export async function writeLimitedDownload(
     if (quotaRoot !== undefined && quotaLimit !== undefined) {
       const committedBytes = treeBytes(quotaRoot, temporary);
       if (committedBytes + bytes > quotaLimit) {
-        throw new Error(`Campus download directory reached its ${quotaLimit}-byte quota`);
+        throw new Error(`UP MCP download directory reached its ${quotaLimit}-byte quota`);
       }
     }
     quotaLock?.assertOwned();

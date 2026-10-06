@@ -1,6 +1,6 @@
 {
   "name": "universidad-pacifico-mcp",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Servidor MCP local y no oficial para Aula Virtual Blackboard de la Universidad del Pacífico (Perú).",
   "license": "ISC",
   "type": "commonjs",
@@ -19,7 +19,7 @@
     "examples/"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "node scripts/build.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
@@ -29,11 +29,12 @@
     "browser:install": "playwright install chromium",
     "test": "npm run build && node scripts/test.mjs",
     "test:mcp": "node tests/mcp-smoke.mjs",
-    "check": "npm run typecheck && npm test && npm run test:mcp && npm run check:package",
+    "check": "npm run typecheck && npm test && npm run test:mcp && npm run check:docs && npm run check:package",
     "check:package": "node scripts/check-package.mjs",
     "share": "npm run check && npm run package:share",
     "package:share": "node scripts/share.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "check:docs": "node scripts/check-docs.mjs"
   },
   "keywords": [
     "mcp",

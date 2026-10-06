@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { AxiosInstance } from 'axios';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { registerStudentTools } from '../src/blackboard/student-tools.js';
+import { registerTools } from '../src/mcp/tools/index.js';
 import { announcement, calendarEvent, gradePeriods, institutionAnnouncements, visibleCalendars } from '../src/blackboard/api/student.js';
 import { courseGradebook, courseOutline, multiAnnouncementSearch, multiContentSearch, multiGradebook, multiOverview, reviewSummary, selectedCourses, studyBrief, submissionReceipts } from '../src/blackboard/services/student.js';
 import { assignmentFeedback } from '../src/blackboard/services/course-workflows.js';
@@ -75,9 +75,9 @@ test('retroalimentación no consulta archivos sin petición y conserva comentari
 test('las consultas propias fijan la cuenta autenticada y las herramientas locales no requieren sesión', async () => {
   const handlers = new Map<string, any>(); let requested = 0;
   const client = fixture(url => { if (url.endsWith('/users/me')) return { id: userId }; return page([]); });
-  registerStudentTools({ registerTool: (name: string, config: any, handler: any) => handlers.set(name, { config, handler }) } as unknown as McpServer,
+  registerTools({ registerTool: (name: string, config: any, handler: any) => handlers.set(name, { config, handler }) } as unknown as McpServer,
     async () => { requested++; return { client, session: {} as any }; });
-  assert.equal(handlers.size, 24); assert(!('userId' in handlers.get('blackboard_get_submission_receipts').config.inputSchema));
+  assert.equal(handlers.size, 70); assert(!('userId' in handlers.get('blackboard_get_submission_receipts').config.inputSchema));
   await handlers.get('blackboard_get_submission_receipts').handler({ courseId, columnId: '_2_1' }); assert.equal(requested, 1);
   assert.equal(handlers.get('blackboard_read_downloaded_material').config.annotations.readOnlyHint, true);
   assert.equal(handlers.get('blackboard_export_multi_course_agenda').config.annotations.readOnlyHint, false);

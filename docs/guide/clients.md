@@ -1,5 +1,7 @@
 # Conexión con clientes MCP
 
+[Índice de documentación](../README.md)
+
 ## Comando común
 
 Primero instala dependencias y compila. Luego usa como proceso MCP:
@@ -38,7 +40,7 @@ El acceso institucional se realiza con `blackboard_login` o `up-mcp login`; este
 
 ## Clientes con mcpServers
 
-Usa [mcp.json](../examples/mcp.json) o [mcp.windows.json](../examples/mcp.windows.json). Su ubicación depende del cliente. Estos archivos usan el objeto `mcpServers`; otros clientes pueden requerir un envoltorio diferente, aunque el comando y los argumentos sean los mismos.
+Usa [mcp.json](../../examples/mcp.json) o [mcp.windows.json](../../examples/mcp.windows.json). Su ubicación depende del cliente. Estos archivos usan el objeto `mcpServers`; otros clientes pueden requerir un envoltorio diferente, aunque el comando y los argumentos sean los mismos.
 
 ```json
 {

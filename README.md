@@ -1,63 +1,46 @@
 # Universidad del Pacífico MCP
 
-**Tu Aula Virtual de la UP, conectada con tu asistente.**
+Conecta tu asistente con **Aula Virtual de la Universidad del Pacífico, Perú** para consultar tus cursos y trabajar con sus materiales.
 
-[Repositorio](https://github.com/andrsnrua/universidad-pacifico-mcp) · [Descargar la última versión](https://github.com/andrsnrua/universidad-pacifico-mcp/releases/latest) · [Reportar un problema](https://github.com/andrsnrua/universidad-pacifico-mcp/issues)
+[![Verificación](https://github.com/andrsnrua/universidad-pacifico-mcp/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/andrsnrua/universidad-pacifico-mcp/actions/workflows/ci.yml)
+[![Versión](https://img.shields.io/github/v/release/andrsnrua/universidad-pacifico-mcp)](https://github.com/andrsnrua/universidad-pacifico-mcp/releases/latest)
 
-Servidor [Model Context Protocol](https://modelcontextprotocol.io/) local, comunitario y **no oficial** para Blackboard de la **Universidad del Pacífico, Perú**. Permite consultar cursos, anuncios, actividades, calendario, calificaciones y materiales con los permisos de tu propia cuenta.
+Servidor local [Model Context Protocol](https://modelcontextprotocol.io/) con **70 herramientas, 5 prompts y 1 guía MCP**. Usa el acceso y los permisos de tu propia cuenta en `aulavirtual.up.edu.pe`. Es un proyecto comunitario **no oficial**.
 
-Este proyecto contiene únicamente el MCP de la UP. Funciona de forma independiente y no requiere NexoSavia, NotebookLM ni una aplicación de escritorio propia.
+## Qué permite hacer
 
-## Qué puedes hacer
+| Área | Funciones |
+| --- | --- |
+| Cursos | Listar tus secciones, consultar su estructura y reunir resúmenes de cursos seleccionados. |
+| Materiales y sílabos | Buscar contenido publicado, localizar posibles sílabos e inventariar adjuntos y enlaces. |
+| Anuncios | Consultar avisos de cursos e institucionales y buscar entre secciones elegidas. |
+| Actividades y notas | Leer enunciados, intentos existentes, comentarios, comprobantes publicados y calificaciones propias. |
+| Calendario | Reunir eventos y vencimientos publicados de una o varias secciones. |
+| Participación | Consultar discusiones Ultra, grupos accesibles y tu asistencia registrada. |
+| Biblioteca local | Descargar materiales y leer o buscar texto en PDF, DOCX, PPTX, XLSX y archivos UTF-8. |
+| Exportaciones | Guardar copias privadas de agenda, notas, asistencia, estructura, resúmenes y comprobantes. |
 
-- Identificar tus cursos y sus secciones sin mezclar asignaturas con nombres similares.
-- Revisar anuncios, carpetas, páginas, enunciados y adjuntos.
-- Consultar actividades, intentos ya existentes, notas y retroalimentación.
-- Consultar discusiones Ultra, sus temas, mensajes y respuestas accesibles.
-- Revisar grupos publicados, conjuntos de grupos y tu inscripción en cada curso de Blackboard.
-- Consultar sesiones y asistencia propia, filtrando las sesiones del curso elegido; leer el estado de revisión de contenidos.
-- Reunir el detalle de una nota con sus comentarios e intentos y combinar agendas de hasta diez cursos por ID.
-- Buscar títulos, texto publicado y nombres de archivos en las carpetas de una sección.
-- Obtener inventarios de archivos por extensión y enlaces publicados, sin abrir servicios externos.
-- Buscar términos en los anuncios y guardar copias de la agenda como `.ics` y de las notas como CSV.
-- Localizar posibles sílabos y recuperar instrucciones del contenido vinculado a una actividad.
-- Reunir el resumen de un curso y una agenda de eventos y vencimientos publicados.
-- Leer eventos publicados en Blackboard dentro de un intervalo de fechas.
-- Descargar materiales del curso y conservar su estructura, indicaciones y procedencia en un manifiesto local.
-- Usar 70 herramientas, 5 prompts de estudio y una guía institucional como recurso MCP.
+El acceso remoto es de **solo lectura**. Los resultados conservan la sección, la fuente y los avisos de consultas incompletas. El servidor no entrega tareas, modifica calificaciones, realiza matrículas ni procesa pagos. Las sesiones, descargas y exportaciones se guardan localmente.
 
-También puedes consultar anuncios institucionales, calendarios y comprobantes de entrega; buscar entre cursos elegidos; reunir libros de notas propios y leer texto de PDF, Word, PowerPoint y Excel ya descargados. La biblioteca permite búsquedas e inspección de manifiestos, y las exportaciones guardan copias privadas de asistencia, estructura, resúmenes, comprobantes y datos de varias secciones. Consulta [STUDENT-WORKFLOWS.md](docs/STUDENT-WORKFLOWS.md) para sus límites.
+## Instalación
 
-El cliente REST solo permite `GET`. El MCP no entrega tareas, cambia notas, realiza matrículas ni procesa pagos. Las descargas y el inicio/cierre de sesión sí modifican archivos locales.
-
-## Inicio rápido
-
-Necesitas Node.js 22.13.0 o posterior, npm y una cuenta con acceso a [Aula Virtual UP](https://aulavirtual.up.edu.pe). Para autenticarte, usa un equipo con escritorio gráfico y Chrome, Edge o Chromium. La implementación es multiplataforma; consulta la validación de cada entrega en [VALIDATION.md](docs/VALIDATION.md).
-
-Descarga el ZIP de código desde [GitHub Releases](https://github.com/andrsnrua/universidad-pacifico-mcp/releases/latest), o clona el repositorio:
+Necesitas **Node.js 22.13.0 o posterior**, npm, una cuenta UP con acceso a Aula Virtual y Chrome, Edge o Chromium. El inicio de sesión requiere un escritorio gráfico.
 
 ```sh
 git clone https://github.com/andrsnrua/universidad-pacifico-mcp.git
 cd universidad-pacifico-mcp
-```
-
-Desde la carpeta `universidad-pacifico-mcp`:
-
-```sh
 npm ci --ignore-scripts
 npm run build
-npm run doctor
 npm run login
 ```
 
-Completa tú mismo el acceso y cualquier verificación de Microsoft/MFA en el navegador. No compartas tu contraseña con el asistente. Si no se puede abrir un navegador:
+Completa el acceso institucional y la verificación MFA en el navegador. Si falta un navegador compatible, ejecuta `npm run browser:install` y vuelve a iniciar sesión.
 
-```sh
-npm run browser:install
-npm run login
-```
+También puedes instalar desde los archivos de [GitHub Releases](https://github.com/andrsnrua/universidad-pacifico-mcp/releases/latest). Consulta la [guía de instalación](docs/guide/installation.md).
 
-Enlaza el MCP con tu cliente. Para Codex, copia [examples/codex-config.toml](examples/codex-config.toml) y reemplaza la ruta absoluta; los detalles están en [CLIENTS.md](docs/CLIENTS.md). En clientes que usan `mcpServers`, la configuración es:
+## Conectar el asistente
+
+Configura tu cliente MCP para ejecutar `node` con la ruta absoluta a `dist/index.js`:
 
 ```json
 {
@@ -70,93 +53,60 @@ Enlaza el MCP con tu cliente. Para Codex, copia [examples/codex-config.toml](exa
 }
 ```
 
-En Windows usa una ruta como `C:/Proyectos/universidad-pacifico-mcp/dist/index.js`. Si el cliente no encuentra `node`, especifica también su ruta absoluta. El proceso se ejecuta por **stdio**; iniciarlo manualmente deja el terminal esperando mensajes MCP. Usa `node dist/index.js` en el cliente, para que los encabezados de npm no contaminen el protocolo.
+En Windows, por ejemplo: `C:/Proyectos/universidad-pacifico-mcp/dist/index.js`. El cliente inicia el servidor y se comunica por **stdio**. Consulta la [conexión con clientes](docs/guide/clients.md) y los [ejemplos de configuración](examples).
 
-## Cómo está adaptado a la UP
+## Empezar a usarlo
 
-El destino se fija en `aulavirtual.up.edu.pe`, que enlaza el [portal oficial de plataformas de la UP](https://blackboard.up.edu.pe/). Cada curso conserva su ID y la información que entregue Blackboard; no se presupone un esquema de nombres, carpetas o periodos.
+Pide al asistente:
 
-La [guía institucional de sílabos](https://sites.google.com/up.edu.pe/silabo/tutoriales/departamentos) distingue asignatura y sección. Consulta el sílabo y el cronograma publicados por el docente para entender fechas y ponderaciones. El MCP no inventa porcentajes de evaluación ni presenta las notas de Blackboard como un certificado académico. Revisa [UNIVERSIDAD-DEL-PACIFICO.md](docs/UNIVERSIDAD-DEL-PACIFICO.md).
+> Comprueba mi sesión y lista mis cursos con sus IDs.
 
-## Primeras preguntas al asistente
+> Revisa los anuncios y las fechas publicadas de esta sección para esta semana, en hora de Lima.
 
-> Comprueba mi sesión en Aula Virtual y muéstrame mis cursos, con sus identificadores.
+> Localiza el sílabo de esta sección y verifica el documento antes de usar sus ponderaciones.
 
-> Revisa los anuncios, actividades y eventos de este curso para esta semana. Muestra las fechas en hora de Lima y distingue lo que no está publicado.
+> Descarga los materiales accesibles de este curso. Busca «elasticidad» en los documentos descargados y cita los archivos y las páginas disponibles.
 
-> Busca el sílabo de esta sección y muéstrame los candidatos con sus IDs. Comprueba el documento antes de usar sus ponderaciones.
+> Muéstrame mis notas y comentarios publicados. Exporta una copia privada a CSV.
 
-> Busca «elasticidad» entre los materiales publicados, incluyendo nombres de adjuntos. Indica si la búsqueda quedó incompleta.
+Obtén primero los IDs con `blackboard_list_courses`: dos secciones pueden tener el mismo nombre. Todas las herramientas se llaman `blackboard_*`; sus parámetros están en la [referencia de herramientas](docs/reference/tools.md).
 
-> Lista los PDF y las diapositivas de esta sección con su ubicación. Busca anuncios que mencionen cambios de fecha.
+## Privacidad y alcance
 
-> Exporta la agenda publicada de esta semana a un archivo ICS local y mis notas a CSV. Señala si falta alguna fuente.
+La sesión se guarda por defecto en `~/.upacifico-mcp` y los materiales en `~/Downloads/upacifico-mcp`. Puedes cambiar ambas ubicaciones mediante la [configuración](docs/guide/configuration.md). Conserva las sesiones y los datos académicos fuera del repositorio.
 
-> Combina la agenda de estas secciones y muestra mi asistencia solo para las sesiones registradas en cada una. No interpretes registros ausentes como faltas.
+Las respuestas de las herramientas llegan al asistente conectado. La lectura depende de los permisos y de lo que cada docente publique. Un dato ausente no demuestra falta de entrega ni inasistencia; las notas de Blackboard no se presentan como un certificado académico. La lectura de documentos tiene límites y no incluye OCR. Consulta las [capacidades y límites](docs/reference/capabilities.md) y la [guía de privacidad](SECURITY.md).
 
-> Lista las discusiones disponibles de este curso Ultra y muestra los mensajes publicados. Lee mi estado de revisión de este contenido sin modificarlo.
-
-> Descarga los materiales accesibles de este curso y resume los archivos omitidos o fallidos del manifiesto.
-
-Las herramientas se llaman `blackboard_*`. Los prompts disponibles son `revisar_semana`, `revisar_curso`, `descargar_materiales`, `leer_material` y `revisar_mis_cursos`. Consulta todos los parámetros en [TOOLS.md](docs/TOOLS.md).
-
-## Privacidad y sesiones
-
-Por defecto, la sesión se guarda en `~/.upacifico-mcp` y los materiales en `~/Downloads/upacifico-mcp`, fuera del código. El proyecto no incluye telemetría, contraseñas ni cuentas preconfiguradas. Recordar el estado SSO adicional requiere activarlo expresamente.
-
-El MCP corre localmente, pero **los datos que devuelva una herramienta llegan al cliente/asistente que conectaste**. Revisa su política antes de consultar notas o entregas. Las sesiones son credenciales sensibles aunque no contengan una contraseña.
+Para revisar la configuración local o cerrar sesión:
 
 ```sh
+npm run doctor
 npm run logout
 ```
 
-Esto elimina la sesión y el perfil local del MCP. No borra los materiales descargados ni revoca todas tus sesiones institucionales. Variables de entorno y detalles: [CONFIGURATION.md](docs/CONFIGURATION.md), [AUTHENTICATION.md](docs/AUTHENTICATION.md) y [SECURITY.md](SECURITY.md).
+## Documentación y desarrollo
 
-## Estructura
+El [índice de documentación](docs/README.md) reúne las guías de uso, la referencia completa y las instrucciones para contribuir y publicar versiones.
 
-```text
-src/
-  index.ts                   Inicio por stdio y utilidades login/logout/doctor
-  mcp/                       Servidor, guía institucional, recurso y prompts
-  blackboard/
-    config.ts                Dominio UP y carpeta privada de sesión
-    tools.ts                 Catálogo de herramientas y esquemas
-    auth/                    Navegador, sesiones, renovación y SSO opcional
-    api/                     Cliente GET, paginación, cursos y actividades
-    services/                Búsqueda, sílabos, inventarios, agenda y exportaciones
-  downloads/                 Recorrido de materiales y manifiesto
-  library/                   Lectura y búsqueda local de PDF, Office y texto
-  security/                  Rutas, cuotas y escritura segura
-  runtime/                   Navegador y coordinación de concurrencia
-tests/                       Pruebas sintéticas y protocolo stdio
-docs/                        Instalación, arquitectura, UP y publicación
-examples/                    Configuraciones de clientes sin credenciales
-scripts/                     Pruebas y distribución verificable
-.github/                     CI y plantillas para colaborar
-```
+| Carpeta | Responsabilidad |
+| --- | --- |
+| `src/mcp/` | Servidor, herramientas por función, prompts y recurso institucional. |
+| `src/blackboard/` | Autenticación, API de lectura y consultas académicas. |
+| `src/downloads/` | Descarga de materiales y manifiestos. |
+| `src/library/` | Lectura y búsqueda de documentos locales. |
+| `src/security/` y `src/runtime/` | Protección de archivos, navegador y concurrencia. |
+| `tests/` | Pruebas con datos ficticios y verificación del protocolo. |
+| `docs/`, `examples/` y `scripts/` | Documentación, configuraciones y distribución. |
 
-## Desarrollo y distribución
+Estas carpetas contienen código y documentación. Los materiales y las sesiones se almacenan en las ubicaciones privadas configuradas.
 
 ```sh
 npm run check
 npm run share
 ```
 
-`check` verifica tipos, pruebas, arranque MCP y contenido del paquete. `share` además crea en `release/` un ZIP de código fuente, un paquete npm `.tgz` y sus hashes SHA-256. No publica nada en Internet. Instrucciones: [PUBLISHING.md](docs/PUBLISHING.md).
+`check` verifica tipos, pruebas, protocolo, enlaces de documentación y contenido del paquete. `share` genera el ZIP fuente, el paquete compilado y sus hashes en `release/`. Consulta la [arquitectura](docs/development/architecture.md) y la [publicación de versiones](docs/development/releasing.md).
 
-## Límites conocidos
+## Licencia
 
-- El acceso y la duración de sesión dependen de la UP y del proveedor de identidad.
-- Calendario, notas y contenidos pueden responder `403` o estar incompletos según permisos o publicación.
-- La búsqueda remota examina texto publicado y nombres de archivos. La biblioteca local permite leer y buscar texto de PDF, Word, PowerPoint y Excel descargados, con límites explícitos y sin OCR. El sílabo se devuelve como candidato, no como documento certificado.
-- La agenda reúne fechas publicadas en intervalos de hasta 112 días; no identifica automáticamente entregas pendientes ni calcula la nota final. Consulta la [matriz de capacidades](docs/CAPABILITIES.md).
-- Los archivos `.ics` son copias de las fechas devueltas; no expanden recurrencias ni sincronizan cambios posteriores. Las notas CSV son privadas. Consulta [EXPORTS.md](docs/EXPORTS.md).
-- Los enlaces externos se registran; no se descargan ni se autentican automáticamente.
-- Discusiones Ultra, grupos y asistencia dependen de la configuración y los permisos de cada curso. Un registro ausente no implica inasistencia, ni una lista de grupos acredita pertenencia. Consulta [PARTICIPATION.md](docs/PARTICIPATION.md).
-- Reutilizar un ID/nombre de adjunto puede impedir detectar una sustitución remota. No se promete sincronización perfecta.
-- El MCP tiene una cuenta por proceso y transporte stdio. No incluye servidor público HTTP ni gestión multiusuario.
-- Las pruebas automatizadas usan datos ficticios; no sustituyen una comprobación manual con tu cuenta institucional.
-
-## Licencia y atribución
-
-Licencia [ISC](LICENSE). El código de integración se deriva de [Campus CLI](https://github.com/alejooroncoy/campus-cli) y de su adaptación local en NexoSavia. Se conservan el aviso y la licencia original; consulta [NOTICE](NOTICE). No existe afiliación ni respaldo oficial de la Universidad del Pacífico, Microsoft o el proveedor de Blackboard.
+[ISC](LICENSE). La atribución al código original se conserva en [NOTICE](NOTICE).

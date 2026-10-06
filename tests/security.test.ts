@@ -65,7 +65,7 @@ test('only Blackboard cookies survive session persistence', () => {
 
 
 test('MCP downloads stay under their configured root and never overwrite', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-download-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-download-test-'));
   const previous = process.env.UP_MCP_DOWNLOAD_DIR;
   process.env.UP_MCP_DOWNLOAD_DIR = root;
   t.after(() => {
@@ -103,7 +103,7 @@ test('MCP downloads stay under their configured root and never overwrite', async
 });
 
 test('oversized downloads are deleted instead of leaving partial files', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-limit-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-limit-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const destination = path.join(root, 'large.bin');
   await assert.rejects(
@@ -114,7 +114,7 @@ test('oversized downloads are deleted instead of leaving partial files', async (
 });
 
 test('download streams are destroyed when exclusive destination creation fails', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-stream-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-stream-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const destination = path.join(root, 'existing.bin');
   fs.writeFileSync(destination, 'existing');
@@ -128,7 +128,7 @@ test('download streams are destroyed when exclusive destination creation fails',
 });
 
 test('the final download name is published only after the stream completes', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-publish-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-publish-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const destination = path.join(root, 'material.pdf');
   const input = new PassThrough();
@@ -146,7 +146,7 @@ test('the final download name is published only after the stream completes', asy
 });
 
 test('download streams are destroyed when response-derived filenames are unsafe', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-name-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-name-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const input = new PassThrough();
 
@@ -155,7 +155,7 @@ test('download streams are destroyed when response-derived filenames are unsafe'
 });
 
 test('the configured download root itself cannot be a symlink', (t) => {
-  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-root-link-test-'));
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-root-link-test-'));
   const target = path.join(parent, 'target');
   const link = path.join(parent, 'downloads');
   fs.mkdirSync(target);
@@ -171,8 +171,8 @@ test('the configured download root itself cannot be a symlink', (t) => {
 });
 
 test('missing directories beneath symlinks are rejected before creation', (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-parent-link-test-'));
-  const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-parent-target-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-parent-link-test-'));
+  const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-parent-target-'));
   fs.symlinkSync(outside, path.join(root, 'linked-outside'));
   const previous = process.env.UP_MCP_DOWNLOAD_DIR;
   process.env.UP_MCP_DOWNLOAD_DIR = root;
@@ -188,7 +188,7 @@ test('missing directories beneath symlinks are rejected before creation', (t) =>
 });
 
 test('the download directory quota includes files already on disk', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-quota-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-quota-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   fs.writeFileSync(path.join(root, 'existing.bin'), Buffer.alloc(3));
   const destination = path.join(root, 'new.bin');
@@ -200,7 +200,7 @@ test('the download directory quota includes files already on disk', async (t) =>
 });
 
 test('abandoned private download files are reclaimed while holding the quota lock', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-part-cleanup-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-part-cleanup-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const abandoned = path.join(
     root,
@@ -217,7 +217,7 @@ test('abandoned private download files are reclaimed while holding the quota loc
 });
 
 test('nested reaper-prefixed user directories are preserved and counted', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-nested-reaper-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-nested-reaper-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const nested = path.join(root, 'course', `${DOWNLOAD_QUOTA_LOCK}.reap-not-internal`);
   fs.mkdirSync(nested, { recursive: true });
@@ -234,7 +234,7 @@ test('nested reaper-prefixed user directories are preserved and counted', async 
 });
 
 test('download quota waits for a filesystem lock shared with other processes', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-quota-lock-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-quota-lock-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const lockPath = path.join(root, DOWNLOAD_QUOTA_LOCK);
   fs.mkdirSync(lockPath);
@@ -255,7 +255,7 @@ test('download quota waits for a filesystem lock shared with other processes', a
 });
 
 test('a replaced quota lock fences the old writer before final publication', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-quota-fence-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-quota-fence-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const destination = path.join(root, 'new.bin');
   const input = new PassThrough();
@@ -278,7 +278,7 @@ test('a replaced quota lock fences the old writer before final publication', asy
 });
 
 test('a folder in the library that Windows will not list does not block downloads elsewhere', async (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-download-eperm-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-download-eperm-'));
   const previous = process.env.UP_MCP_DOWNLOAD_DIR;
   process.env.UP_MCP_DOWNLOAD_DIR = root;
   const locked = path.join(root, 'Seguridad', 'CursoUP');

@@ -1,5 +1,7 @@
 # Alcance en la Universidad del Pacífico
 
+[Índice de documentación](../README.md)
+
 ## Servicios y evidencia
 
 La integración apunta al Aula Virtual de la **UP de Perú**, con el origen fijo `https://aulavirtual.up.edu.pe`. El [portal oficial de plataformas UP](https://blackboard.up.edu.pe/) enlaza ese dominio para las categorías que muestra. Esto verifica el destino, pero no concede acceso a cualquier curso o programa: cada cuenta conserva sus permisos reales.

@@ -1,5 +1,7 @@
 # Configuración
 
+[Índice de documentación](../README.md)
+
 El servidor lee variables del entorno del proceso. **No carga `.env` automáticamente.** `.env.example` documenta las opciones y no debe contener valores reales.
 
 | Variable | Predeterminado | Uso |

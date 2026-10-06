@@ -4,7 +4,7 @@ Este MCP comunitario utiliza una cuenta institucional local con los permisos que
 
 ## Datos sensibles
 
-Las cookies son credenciales. `session.json` no está cifrado por la aplicación; el perfil de Chromium también puede contener estado sensible. El SSO adicional es optativo y se cifra, pero eso no cifra todo el directorio de sesión. Consulta [AUTHENTICATION.md](docs/AUTHENTICATION.md) para las diferencias entre Windows y POSIX.
+Las cookies son credenciales. `session.json` no está cifrado por la aplicación; el perfil de Chromium también puede contener estado sensible. El SSO adicional es optativo y se cifra, pero eso no cifra todo el directorio de sesión. Consulta [authentication.md](docs/guide/authentication.md) para las diferencias entre Windows y POSIX.
 
 El proyecto no incluye telemetría. Aun así, las respuestas académicas se envían al cliente MCP conectado: «local» no significa que el asistente nunca reciba notas o contenido. El usuario debe elegir un cliente apropiado para esos datos.
 
@@ -29,6 +29,6 @@ Un archivo descargado es contenido externo: el MCP no lo ejecuta. No confíes en
 
 ## Reportar una vulnerabilidad
 
-No publiques una prueba que contenga credenciales o datos de estudiantes. Utiliza el canal privado del repositorio público cuando el mantenedor lo habilite. Esta entrega local no configura un contacto personal ni promete tiempos de respuesta.
+No publiques una prueba que contenga credenciales o datos de estudiantes. Utiliza el canal privado del repositorio público cuando el mantenedor lo habilite. Comparte únicamente pasos de reproducción con datos ficticios en los canales públicos.
 
 Comparte pasos mínimos con valores ficticios y explica el impacto. Para problemas funcionales sin información sensible, usa la plantilla de issues.

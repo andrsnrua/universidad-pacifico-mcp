@@ -142,10 +142,7 @@ export function createClient(session: Session, options: ClientOptions = {}): Axi
   const reuse = options.reuse ?? reuseFor(key);
   const base = axios.getAdapter(client.defaults.adapter);
   client.defaults.adapter = (config) => {
-    // Central choke point: every request this client ever sends passes through
-    // here, so this is where the session leaks if a URL slips through unchecked
-    // — enforcing it at each call site instead has already missed one (the `campus
-    // api` CLI command shipped without the guard that blackboard_raw_api got).
+    // Valida el método y el destino antes de enviar cualquier petición con cookies.
     const method = (config.method ?? 'get').toUpperCase();
     if (method !== 'GET') throw new Error('Solo se permite GET: este MCP no modifica Blackboard.');
     assertSameOrigin(config.url ?? '');

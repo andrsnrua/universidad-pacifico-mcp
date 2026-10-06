@@ -1,5 +1,7 @@
 # Capacidades y límites verificables
 
+[Índice de documentación](../README.md)
+
 Este proyecto sirve únicamente a **Aula Virtual Blackboard de la Universidad del Pacífico, Perú**. Implementar una consulta no garantiza que la UP la habilite para todas las cuentas o secciones. Las pruebas automatizadas usan datos ficticios; las pruebas con una cuenta institucional se realizan y conservan fuera del repositorio.
 
 | Necesidad | Implementación disponible | Límite |
@@ -43,4 +45,4 @@ Compartir este proyecto significa distribuir código y documentación. No incluy
 5. «Abre la actividad `_67890_1` del curso `_12345_1` y muéstrame las instrucciones publicadas.»
 6. «Muestra la agenda del curso entre el 5 y el 12 de octubre, con fechas en Lima y la fuente de cada evento.»
 
-Los IDs son ficticios. Reemplázalos por los valores devueltos por Blackboard. Consulta los parámetros de las 70 herramientas en [TOOLS.md](TOOLS.md), los detalles de participación en [PARTICIPATION.md](PARTICIPATION.md), los formatos en [EXPORTS.md](EXPORTS.md) y la evidencia de ejecución en [VALIDATION.md](VALIDATION.md).
+Los IDs son ficticios. Reemplázalos por los valores devueltos por Blackboard. Consulta los parámetros de las 70 herramientas en [tools.md](tools.md), los detalles de participación en [participation.md](participation.md), los formatos en [exports.md](exports.md) y la evidencia de ejecución en [validation.md](../development/validation.md).

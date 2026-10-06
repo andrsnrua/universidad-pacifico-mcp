@@ -1,8 +1,10 @@
-# Consultas entre cursos y biblioteca privada
+# Trabajar con tus cursos
 
-La versión 0.5.0 añade 24 herramientas y dos prompts: el catálogo contiene 70 herramientas, cinco prompts y una guía MCP. Continúa limitado a Aula Virtual de la Universidad del Pacífico.
+[Índice de documentación](../README.md)
 
-## Fuentes adicionales
+Empieza con `blackboard_whoami` y `blackboard_list_courses`. Selecciona cada sección por su ID antes de consultar materiales, fechas o notas. La información proviene de Aula Virtual de la Universidad del Pacífico y conserva sus permisos.
+
+## Anuncios, calendario y comprobantes
 
 Anuncios institucionales, calendarios visibles, detalle de evento, detalle de anuncio y periodos del libro de notas usan el [catálogo oficial de Blackboard](https://developer.blackboard.com/portal/displayApi/Learn). Solo devuelven datos autorizados para la cuenta. Los periodos de evaluación no certifican matrícula. Para el detalle de evento usa exactamente el tipo e ID devueltos por `blackboard_list_calendar`; algunos IDs son distintos del formato `_12345_1`.
 
@@ -40,7 +42,7 @@ La inspección acepta `manifest.json` de esquema 2 y verifica referencias segura
 
 ## Copias privadas
 
-Las nuevas exportaciones guardan agenda múltiple en ICS, asistencia y comprobantes en CSV, estructura en JSON, resumen en Markdown y notas múltiples en CSV. Conservan nombres únicos, raíz privada, cuota y límite de 5 MiB. Consultas parciales exigen `allowPartial: true` y conservan avisos. Los CSV neutralizan campos de texto interpretables como fórmulas.
+Las exportaciones guardan agenda múltiple en ICS, asistencia y comprobantes en CSV, estructura en JSON, resumen en Markdown y notas múltiples en CSV. Conservan nombres únicos, raíz privada, cuota y límite de 5 MiB. Consultas parciales exigen `allowPartial: true` y conservan avisos. Los CSV neutralizan campos de texto interpretables como fórmulas.
 
 Cada evento combinado conserva el ID de su sección; nombres de cursos iguales no mezclan eventos. No se importa ni sincroniza automáticamente. Una copia parcial puede omitir cursos restringidos: revisa sus avisos.
 

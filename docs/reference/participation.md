@@ -1,5 +1,7 @@
 # Participación, asistencia y consultas propias
 
+[Índice de documentación](../README.md)
+
 Estas funciones usan los endpoints públicos de lectura del [catálogo oficial de Blackboard Learn](https://developer.blackboard.com/portal/displayApi/Learn). El catálogo describe el contrato de API; no garantiza acceso en todas las cuentas de la UP. Cada error de permisos se conserva y las respuestas académicas se entregan únicamente al cliente conectado.
 
 ## Discusiones Ultra

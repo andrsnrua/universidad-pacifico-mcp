@@ -1,5 +1,7 @@
 # Resolver problemas
 
+[Índice de documentación](../README.md)
+
 | Síntoma | Acción |
 | --- | --- |
 | El cliente no encuentra Node | Usa la ruta absoluta de `node` y de `dist/index.js`. |

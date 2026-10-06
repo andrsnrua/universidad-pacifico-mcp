@@ -11,7 +11,7 @@ test('remote source keys are stable and distinguish attachments from embedded fi
 });
 
 test('the newest valid course manifest is selected during legacy migration', () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-manifest-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-manifest-'));
   try {
     fs.writeFileSync(path.join(directory, 'manifest.json'), JSON.stringify({ generatedAt: '2026-01-01T00:00:00Z', course: { id: '_1_1' }, downloaded: [{ fileName: 'old.pdf' }] }));
     fs.writeFileSync(path.join(directory, 'manifest (2).json'), JSON.stringify({ generatedAt: '2026-02-01T00:00:00Z', course: { id: '_1_1' }, downloaded: [{ fileName: 'new.pdf' }] }));
@@ -22,7 +22,7 @@ test('the newest valid course manifest is selected during legacy migration', () 
 });
 
 test('canonical manifest writes replace metadata instead of creating numbered copies', () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'campus-manifest-write-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'up-mcp-manifest-write-'));
   try {
     const destination = path.join(directory, 'manifest.json');
     atomicManifestWrite(destination, { version: 1 });

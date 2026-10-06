@@ -1,5 +1,7 @@
 # Instalación
 
+[Índice de documentación](../README.md)
+
 ## Requisitos
 
 - Node.js 22.13.0 o posterior y npm.
@@ -8,7 +10,7 @@
 - Un escritorio gráfico para el primer acceso o para completar MFA.
 - Chrome/Edge instalado, o Chromium mediante Playwright.
 
-No necesitas claves de OpenAI, contraseñas en variables de entorno, Python, una app NexoSavia ni un servidor remoto.
+La instalación utiliza Node.js y npm. El acceso institucional se completa en el navegador; no se configuran contraseñas en el código ni en variables de entorno.
 
 ## Desde un ZIP de código
 
@@ -26,7 +28,7 @@ npm run login
 
 ## Conectar con el asistente
 
-Configura `node` como comando y la ruta **absoluta** a `dist/index.js` como argumento. Usa los ejemplos de [CLIENTS.md](CLIENTS.md). Cada cliente arranca el proceso y habla por stdin/stdout.
+Configura `node` como comando y la ruta **absoluta** a `dist/index.js` como argumento. Usa los ejemplos de [clients.md](clients.md). Cada cliente arranca el proceso y habla por stdin/stdout.
 
 Si el cliente tiene un límite corto para herramientas, amplíalo para el inicio de sesión interactivo y las descargas. La guía de Codex usa 300 segundos; un curso muy grande puede exceder ese límite y necesitar descargas por adjunto.
 
@@ -34,10 +36,10 @@ El directorio de sesión debe ser el mismo en el comando de login y en el client
 
 ## Desde el paquete npm local
 
-Las entregas pueden incluir `universidad-pacifico-mcp-0.5.0.tgz`:
+Las entregas pueden incluir `universidad-pacifico-mcp-0.6.0.tgz`:
 
 ```sh
-npm install -g ./universidad-pacifico-mcp-0.5.0.tgz --ignore-scripts
+npm install -g ./universidad-pacifico-mcp-0.6.0.tgz --ignore-scripts
 up-mcp doctor
 up-mcp login
 ```
