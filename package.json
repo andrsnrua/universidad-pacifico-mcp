@@ -52,7 +52,7 @@
     "@modelcontextprotocol/sdk": "^1.28.0",
     "axios": "^1.20.0",
     "pdfjs-dist": "6.4.299",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "proper-lockfile": "4.1.2",
     "yauzl": "3.4.0",
     "zod": "^4.4.3"
